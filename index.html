@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToolsKilat - Tools Gratis & Cepat</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav>
+        <div class="nav-inner">
+            <div class="logo">⚡ ToolsKilat</div>
+            <div class="nav-links">
+                <a href="#kompres">Kompres</a>
+                <a href="#cicilan">Cicilan</a>
+                <a href="#qr">QR WA</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <h1>Tools Gratis Buat Kebutuhan Harian</h1>
+        <p>Kompres foto, hitung cicilan, dan buat QR WhatsApp dalam 1 klik. Tanpa login, tanpa watermark.</p>
+        <div class="ad-box">ADSENSE TOP BANNER</div>
+    </header>
+
+    <main class="container">
+        <div class="grid">
+            <!-- TOOL 1 -->
+            <div class="card" id="kompres">
+                <div class="card-icon">🖼️</div>
+                <h2>Kompres Foto 100KB</h2>
+                <p class="desc">Pas buat daftar CPNS, sekolah, atau lamar kerja.</p>
+                <input type="file" id="imgInput" accept="image/*" class="file-input">
+                <img id="preview">
+                <div id="resultSize" class="result-text"></div>
+                <a id="downloadLink" class="btn-primary">Download Hasil</a>
+            </div>
+
+            <!-- TOOL 2 -->
+            <div class="card" id="cicilan">
+                <div class="card-icon">💰</div>
+                <h2>Hitung Cicilan KUR</h2>
+                <p class="desc">Simulasi angsuran pinjaman bank dengan bunga.</p>
+                <label>Pinjaman (Rp)</label>
+                <input type="number" id="pinjaman" placeholder="10.000.000">
+                <label>Bunga / tahun (%)</label>
+                <input type="number" id="bunga" placeholder="6">
+                <label>Tenor (Bulan)</label>
+                <input type="number" id="bulan" placeholder="12">
+                <button onclick="hitungCicilan()" class="btn-primary">Hitung Cicilan</button>
+                <div id="hasilCicilan" class="result-box"></div>
+            </div>
+
+            <!-- TOOL 3 -->
+            <div class="card" id="qr">
+                <div class="card-icon">📱</div>
+                <h2>QR WhatsApp</h2>
+                <p class="desc">Bikin QR biar pembeli langsung chat tanpa save nomor.</p>
+                <label>No WA</label>
+                <input type="text" id="waNumber" placeholder="628123456789">
+                <label>Pesan Otomatis</label>
+                <input type="text" id="waText" placeholder="Halo kak, saya mau pesan...">
+                <button onclick="buatQR()" class="btn-primary">Generate QR</button>
+                <div id="qrResult" class="qr-center"></div>
+            </div>
+        </div>
+        <div class="ad-box">ADSENSE BOTTOM BANNER</div>
+    </><footer>© 2026 ToolsKilat.id</footer>
+    </main>
+    <script src="script.js"></script>
+</body>
+          </html>
