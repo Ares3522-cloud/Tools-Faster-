@@ -66,6 +66,66 @@
                 <button onclick="buatQR()" class="btn-primary">Generate QR</button>
                 <div id="qrResult" class="qr-center"></div>
             </div>
+            <!-- TOOLS KE-4: HAPUS BACKGROUND - START -->
+<div class="tool-card">
+  <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px">
+    <div style="width:48px; height:48px; background:#f3f4f6; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:22px">✂️</div>
+    <div>
+      <h3 style="margin:0; font-size:16px">Hapus Background Foto <span style="background:#22c55e; color:#fff; font-size:10px; padding:2px 6px; border-radius:10px; vertical-align:middle">BARU</span></h3>
+      <p style="margin:2px 0 0 0; color:#64748b; font-size:13px">Bikin foto produk jadi transparan otomatis.</p>
+    </div>
+  </div>
+
+  <div id="bgDrop" style="border:2px dashed #cbd5e1; border-radius:12px; padding:16px; text-align:center; background:#f8fafc">
+    <input type="file" id="bgInput" accept="image/*" hidden>
+    <button type="button" onclick="document.getElementById('bgInput').click()" style="border:1px solid #000; background:#fff; padding:8px 16px; border-radius:8px; cursor:pointer; font-weight:600">Pilih Foto</button>
+    <div id="bgFileName" style="font-size:13px; margin-top:8px; color:#64748b">Belum ada file</div>
+    <div id="bgPreview" style="margin-top:12px"></div>
+  </div>
+
+  <button id="bgProcessBtn" disabled style="width:100%; background:#0f172a; color:#fff; padding:14px; border-radius:12px; border:none; font-weight:700; cursor:pointer; margin-top:12px; opacity:0.5">Hapus Background Sekarang</button>
+  <button id="bgDownloadBtn" style="display:none; width:100%; background:#fff; color:#0f172a; border:2px solid #0f172a; padding:12px; border-radius:12px; font-weight:700; cursor:pointer; margin-top:8px">Download Hasil PNG</button>
+  <p id="bgStatus" style="font-size:12px; text-align:center; margin-top:8px; color:#64748b"></p>
+</div>
+
+<script type="module">
+import { removeBackground } from "https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.4.5/dist/index.js";
+let bgFile = null, bgResult = null;
+const el = (id) => document.getElementById(id);
+
+el('bgInput').addEventListener('change', e => {
+  bgFile = e.target.files[0];
+  if(!bgFile) return;
+  el('bgFileName').textContent = bgFile.name;
+  el('bgPreview').innerHTML = `<img src="${URL.createObjectURL(bgFile)}" style="max-width:100%; max-height:200px; border-radius:8px">`;
+  el('bgProcessBtn').disabled = false;
+  el('bgProcessBtn').style.opacity = "1";
+});
+
+el('bgProcessBtn').addEventListener('click', async () => {
+  el('bgProcessBtn').textContent = "Sedang proses... 15 detik";
+  el('bgProcessBtn').disabled = true;
+  el('bgStatus').textContent = "AI lagi kerja, jangan tutup ya...";
+  try {
+    bgResult = await removeBackground(bgFile);
+    el('bgPreview').innerHTML = `<img src="${URL.createObjectURL(bgResult)}" style="max-width:100%; max-height:200px; border-radius:8px; background-image: linear-gradient(45deg, #e5e7eb 25%, transparent 25%), linear-gradient(-45deg, #e5e7eb 25%, transparent 25%); background-size: 20px 20px;">`;
+    el('bgStatus').textContent = "Berhasil jadi transparan!";
+    el('bgDownloadBtn').style.display = "block";
+    el('bgProcessBtn').textContent = "Hapus Background Sekarang";
+    el('bgProcessBtn').disabled = false;
+  } catch(err) {
+    el('bgStatus').textContent = "Gagal: " + err.message;
+  }
+});
+
+el('bgDownloadBtn').addEventListener('click', () => {
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(bgResult);
+  a.download = "toolskilat-hapus-bg.png";
+  a.click();
+});
+</script>
+<!-- TOOLS KE-4: HAPUS BACKGROUND - END -->
         </div>
         <div class="ad-box">ADSENSE BOTTOM BANNER</div>
     </><footer>© 2026 ToolsKilat.id</footer>
